@@ -1,0 +1,27 @@
+{
+	"name": "DestinationDataset_asa",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_fileName": {
+				"type": "String"
+			}
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects"
+			},
+			"fileName": {
+				"value": "@dataset().cw_fileName",
+				"type": "Expression"
+			},
+			"folderPath": "southridgefs/cloudSales"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

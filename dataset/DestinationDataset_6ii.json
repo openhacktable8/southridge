@@ -1,0 +1,19 @@
+{
+	"name": "DestinationDataset_6ii",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "arrayOfObjects"
+			},
+			"fileName": "movieTitles",
+			"folderPath": "southridgefs/movies"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
