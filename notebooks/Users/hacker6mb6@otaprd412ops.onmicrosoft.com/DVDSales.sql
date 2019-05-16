@@ -1,0 +1,65 @@
+-- Databricks notebook source
+-- MAGIC %sql
+-- MAGIC 
+-- MAGIC DROP TABLE IF EXISTS orders_lookup;
+-- MAGIC CREATE TABLE IF NOT EXISTS orders_lookup(
+-- MAGIC CustomerID STRING,
+-- MAGIC OrderID STRING,
+-- MAGIC OrderDate STRING,
+-- MAGIC ShipDate STRING,
+-- MAGIC TotalCost STRING)
+-- MAGIC USING json
+-- MAGIC LOCATION 'mnt/adlsg2/cloudSales/Orders.txt';
+-- MAGIC 
+-- MAGIC 
+-- MAGIC DROP TABLE IF EXISTS orderDetail_lookup;
+-- MAGIC CREATE TABLE IF NOT EXISTS orderDetail_lookup(
+-- MAGIC CreatedDate STRING,
+-- MAGIC LineNumber STRING,
+-- MAGIC MovieID STRING,
+-- MAGIC OrderDetailID STRING,
+-- MAGIC OrderID STRING,
+-- MAGIC Quantity STRING,
+-- MAGIC UnitCost STRING,
+-- MAGIC UpdatedDate STRING
+-- MAGIC )
+-- MAGIC USING json
+-- MAGIC LOCATION 'mnt/adlsg2/cloudSales/OrderDetails.txt';
+
+-- COMMAND ----------
+
+-- MAGIC %sql
+-- MAGIC DROP TABLE IF EXISTS dvdsales;
+-- MAGIC 
+-- MAGIC CREATE TABLE dvdsales
+-- MAGIC USING PARQUET
+-- MAGIC LOCATION 'dbfs:/mnt/adlsg2/conformed/dvdsales'
+-- MAGIC AS
+-- MAGIC SELECT CAST(1 AS INTEGER) as SourceID
+-- MAGIC      , CONCAT('1+',o.OrderID) as UniqueOrderID
+-- MAGIC      , o.OrderID
+-- MAGIC      , od.OrderDetailID
+-- MAGIC      , CONCAT('1+',od.MovieID) as UniqueMovieID
+-- MAGIC      , od.MovieID
+-- MAGIC      , CAST(od.Quantity AS INT) as Quantity
+-- MAGIC      , CAST(od.UnitCost AS FLOAT) AS UnitCost 
+-- MAGIC      , CAST(od.LineNumber AS INT)     
+-- MAGIC      , o.CustomerID
+-- MAGIC      , CONCAT('1+',o.CustomerID) as UniqueCustomerID
+-- MAGIC      , CAST(o.OrderDate AS DATE) AS OrderDate
+-- MAGIC      , CAST(o.ShipDate AS DATE) AS ShipDate
+-- MAGIC      , CAST(o.TotalCost AS FLOAT) AS TotalCost
+-- MAGIC FROM orders_lookup o
+-- MAGIC      JOIN orderDetail_lookup od
+-- MAGIC        ON o.OrderID = od.OrderID;
+
+-- COMMAND ----------
+
+-- MAGIC %sql
+-- MAGIC 
+-- MAGIC SELECT COUNT(1)
+-- MAGIC FROM orders_lookup o
+-- MAGIC      LEFT JOIN orderDetail_lookup od
+-- MAGIC        ON o.OrderID = od.OrderID; 
+-- MAGIC        
+-- MAGIC       
