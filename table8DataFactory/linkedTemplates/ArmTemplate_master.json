@@ -1,0 +1,147 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "table8DataFactory"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"CosmosDb1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDb1'"
+		},
+		"VanArsdelSQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'VanArsdelSQL'"
+		},
+		"VanArsdelSQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'VanArsdelSQL'"
+		},
+		"fourthcoffeefolder_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'fourthcoffeefolder'"
+		},
+		"southridgeSalesDb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'southridgeSalesDb'"
+		},
+		"DestinationDataset_6ii_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "movieTitles"
+		},
+		"DestinationDataset_6ii_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southridgefs/movies"
+		},
+		"DestinationDataset_asa_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().cw_fileName"
+		},
+		"DestinationDataset_asa_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southridgefs/cloudSales"
+		},
+		"SourceDataset_jrr_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"SourceDataset_jrr_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://southridgetable8.dfs.core.windows.net"
+		},
+		"VanArsdelSQL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "openhackadmin"
+		},
+		"fourthcoffeefolder_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "openhackadmin"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"CosmosDb1_connectionString": {
+						"value": "[parameters('CosmosDb1_connectionString')]"
+					},
+					"southridgeSalesDb_connectionString": {
+						"value": "[parameters('southridgeSalesDb_connectionString')]"
+					},
+					"VanArsdelSQL_connectionString": {
+						"value": "[parameters('VanArsdelSQL_connectionString')]"
+					},
+					"VanArsdelSQL_password": {
+						"value": "[parameters('VanArsdelSQL_password')]"
+					},
+					"fourthcoffeefolder_password": {
+						"value": "[parameters('fourthcoffeefolder_password')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"DestinationDataset_6ii_properties_typeProperties_fileName": {
+						"value": "[parameters('DestinationDataset_6ii_properties_typeProperties_fileName')]"
+					},
+					"DestinationDataset_6ii_properties_typeProperties_folderPath": {
+						"value": "[parameters('DestinationDataset_6ii_properties_typeProperties_folderPath')]"
+					},
+					"DestinationDataset_asa_properties_typeProperties_fileName": {
+						"value": "[parameters('DestinationDataset_asa_properties_typeProperties_fileName')]"
+					},
+					"DestinationDataset_asa_properties_typeProperties_folderPath": {
+						"value": "[parameters('DestinationDataset_asa_properties_typeProperties_folderPath')]"
+					},
+					"VanArsdelSQL_properties_typeProperties_userName": {
+						"value": "[parameters('VanArsdelSQL_properties_typeProperties_userName')]"
+					},
+					"fourthcoffeefolder_properties_typeProperties_userId": {
+						"value": "[parameters('fourthcoffeefolder_properties_typeProperties_userId')]"
+					},
+					"SourceDataset_jrr_properties_typeProperties_fileName": {
+						"value": "[parameters('SourceDataset_jrr_properties_typeProperties_fileName')]"
+					},
+					"SourceDataset_jrr_properties_typeProperties_folderPath": {
+						"value": "[parameters('SourceDataset_jrr_properties_typeProperties_folderPath')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

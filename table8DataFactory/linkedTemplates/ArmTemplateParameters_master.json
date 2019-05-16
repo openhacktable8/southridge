@@ -1,0 +1,60 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "table8DataFactory"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"CosmosDb1_connectionString": {
+			"value": ""
+		},
+		"VanArsdelSQL_connectionString": {
+			"value": ""
+		},
+		"VanArsdelSQL_password": {
+			"value": ""
+		},
+		"fourthcoffeefolder_password": {
+			"value": ""
+		},
+		"southridgeSalesDb_connectionString": {
+			"value": ""
+		},
+		"DestinationDataset_6ii_properties_typeProperties_fileName": {
+			"value": "movieTitles"
+		},
+		"DestinationDataset_6ii_properties_typeProperties_folderPath": {
+			"value": "southridgefs/movies"
+		},
+		"DestinationDataset_asa_properties_typeProperties_fileName": {
+			"value": "@dataset().cw_fileName"
+		},
+		"DestinationDataset_asa_properties_typeProperties_folderPath": {
+			"value": "southridgefs/cloudSales"
+		},
+		"SourceDataset_jrr_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"SourceDataset_jrr_properties_typeProperties_folderPath": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://southridgetable8.dfs.core.windows.net"
+		},
+		"VanArsdelSQL_properties_typeProperties_userName": {
+			"value": "openhackadmin"
+		},
+		"fourthcoffeefolder_properties_typeProperties_userId": {
+			"value": "openhackadmin"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
