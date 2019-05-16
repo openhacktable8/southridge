@@ -9,7 +9,7 @@
 		"typeProperties": {
 			"format": {
 				"type": "JsonFormat",
-				"filePattern": "arrayOfObjects"
+				"filePattern": "setOfObjects"
 			},
 			"fileName": "movieTitles",
 			"folderPath": "southridgefs/movies"
